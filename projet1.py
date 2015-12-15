@@ -31,6 +31,29 @@ def parse_file(file):
 	with open(file) as inputfile:
 		for line in inputfile:
 			results.append(line.strip().split(','))
+			
+	
+## Basic analysis based on informations given in the wine.names file
+def datas_basic_verifications(raw_results):
+	list_test = []
+	cpt1 = 0
+	cpt2 = 0
+	cpt3 = 0
+	for list_test in raw_results:
+		if(len(list_test) != 14):	## 13 values + id cultivateur
+			return False
+		
+		if list_test[0] == '1':
+			cpt1 = cpt1 + 1
+		elif list_test[0] == '2':
+			cpt2 = cpt2 + 1
+		else:
+			cpt3 = cpt3 + 1
+	
+	if(cpt1 != 59 or cpt2 != 71 or cpt3 != 48):
+		return False
+	
+	return True
 	
 	
 ## GET A LIST FOR EACH CULTIVATEURS
@@ -84,14 +107,18 @@ def visualize_datas(dataset):
 	for list_test in dataset:
 		plt.plot(list_test)
 	
-
-	plt.show()
+	plt.show()	## show graph
 
 
 ## Feed with ONLY cultivateur lists
 def arranging_datas_cultivars(cultivateurX):	
 	for list_test in cultivateurX:
 		list_test.pop(0)	## Remove first index (cultivateur value)
+		
+		
+def min_max_normalization():
+	print ''
+	
 
 
 def main():
@@ -101,9 +128,20 @@ def main():
 	print 'Jordan TETE'
 	print 'Thomas SOUVANNASAO'
 	print '###############################################\n'
-
+	
+	
 	parse_file('wine.txt')
+	
+	if datas_basic_verifications(results) == True:
+		print 'Basic Verifications OK on Dataset'
+	else:
+		print 'Failed'
+		
 	parse_into_cultivars(results)
+	
+	
+	#X_scaled = preprocessing.scale(X)
+	#print X_scaled
 	
 	arrange_datas_composants_by_cultivars(cultivateur1)
 	

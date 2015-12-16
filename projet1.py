@@ -3,6 +3,8 @@ from sklearn import preprocessing
 import numpy as np
 import matplotlib.pyplot as plt
 
+## Bullshit Rapport
+## http://www.analyticsvidhya.com/blog/2015/07/dimension-reduction-methods/
 
 results = []
 
@@ -87,14 +89,10 @@ def parse_into_wine_composants(results):
 		composant13.append(single_list[13])
 
 
-def arrange_datas_composants_by_cultivars(cultivar):
-	single_list = []
-	datas_test = [[]]
-	#x = 1
-	for single_list in cultivar:
-		for x in range(1, 13):
-			datas_test.append(single_list[x])
-	print datas_test
+## Parse a Dataset into columns
+def arrange_datas_composants_by_cultivars(dataset):
+	new_dataset = np.array(dataset)
+	return np.transpose(new_dataset).tolist()
 	
 			
 ## Datas Visualisation - Display a List of Lists
@@ -116,10 +114,25 @@ def arranging_datas_cultivars(cultivateurX):
 		list_test.pop(0)	## Remove first index (cultivateur value)
 		
 		
-def min_max_normalization():
+def min_max_normalization(dataset):
 	print ''
 	
 
+def apply_PCA_analysis(dataset):
+	print ''
+	
+
+def apply_decision_trees_analysis(dataset):
+	print "TREE ANALYSIS"
+
+
+## Mean calculation
+def calculate_mean(dataset):
+	if(len(dataset) > 0):
+		x = np.array(dataset).astype(np.float)
+		return np.mean(x)
+	else:
+		return 'error mean calculation'
 
 def main():
 	print '###############################################'
@@ -133,9 +146,9 @@ def main():
 	parse_file('wine.txt')
 	
 	if datas_basic_verifications(results) == True:
-		print 'Basic Verifications OK on Dataset'
+		print '->Basic Verifications OK on Dataset\n'
 	else:
-		print 'Failed'
+		print '->Failed - Dataset must be corrupted'
 		
 	parse_into_cultivars(results)
 	
@@ -143,7 +156,13 @@ def main():
 	#X_scaled = preprocessing.scale(X)
 	#print X_scaled
 	
-	arrange_datas_composants_by_cultivars(cultivateur1)
+	## parse composants by cultivars
+	composant_cultivateur1 = arrange_datas_composants_by_cultivars(cultivateur1)
+	composant_cultivateur2 = arrange_datas_composants_by_cultivars(cultivateur2)
+	composant_cultivateur3 = arrange_datas_composants_by_cultivars(cultivateur3)
+	
+	## Display above results
+	visualize_datas(composant_cultivateur1)
 	
 	#parse_into_wine_composants(results)
 	parse_into_wine_composants(cultivateur1)
@@ -155,10 +174,11 @@ def main():
 	dataset.append(composant4)
 
 	
-	visualize_datas(dataset)
+	average = calculate_mean(composant1)
+	
+	#visualize_datas(dataset)
 	
 	
-
 
 
 #########################

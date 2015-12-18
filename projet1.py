@@ -1,5 +1,7 @@
 from sklearn import datasets
 from sklearn import preprocessing
+from sklearn import decomposition
+from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -42,7 +44,7 @@ def datas_basic_verifications(raw_results):
 	cpt2 = 0
 	cpt3 = 0
 	for list_test in raw_results:
-		if(len(list_test) != 14):	## 13 values + id cultivateur
+		if(len(list_test) != 14):	## 13 values + id cultivar
 			return False
 		
 		if list_test[0] == '1':
@@ -94,7 +96,8 @@ def arrange_datas_composants_by_cultivars(dataset):
 	new_dataset = np.array(dataset)
 	return np.transpose(new_dataset).tolist()
 	
-			
+
+## NUAGE DE POINTS 
 ## Datas Visualisation - Display a List of Lists
 def visualize_datas(dataset):
 	fig = plt.figure()
@@ -113,18 +116,6 @@ def arranging_datas_cultivars(cultivateurX):
 	for list_test in cultivateurX:
 		list_test.pop(0)	## Remove first index (cultivateur value)
 		
-		
-def min_max_normalization(dataset):
-	print ''
-	
-
-def apply_PCA_analysis(dataset):
-	print ''
-	
-
-def apply_decision_trees_analysis(dataset):
-	print "TREE ANALYSIS"
-
 
 ## Mean calculation
 def calculate_mean(dataset):
@@ -160,6 +151,11 @@ def main():
 	composant_cultivateur1 = arrange_datas_composants_by_cultivars(cultivateur1)
 	composant_cultivateur2 = arrange_datas_composants_by_cultivars(cultivateur2)
 	composant_cultivateur3 = arrange_datas_composants_by_cultivars(cultivateur3)
+
+	print composant_cultivateur1
+	composant_cultivateur1.pop(13)
+	composant_cultivateur1.pop(12)
+	print composant_cultivateur1
 	
 	## Display above results
 	visualize_datas(composant_cultivateur1)
@@ -172,12 +168,10 @@ def main():
 	dataset.append(composant2)
 	dataset.append(composant3)
 	dataset.append(composant4)
-
 	
 	average = calculate_mean(composant1)
 	
 	#visualize_datas(dataset)
-	
 	
 
 

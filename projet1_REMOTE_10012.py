@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-from sklearn import datasets
-from sklearn import preprocessing
-from sklearn import decomposition
-from mpl_toolkits.mplot3d import Axes3D
-=======
->>>>>>> 3c0c03f57bdd49902c532fea98d33f1c1589cc96
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -42,29 +35,6 @@ def parse_file(file):
 
 ## Basic analysis based on informations given in the wine.names file
 def datas_basic_verifications(raw_results):
-<<<<<<< HEAD
-	list_test = []
-	cpt1 = 0
-	cpt2 = 0
-	cpt3 = 0
-	for list_test in raw_results:
-		if(len(list_test) != 14):	## 13 values + id cultivar
-			return False
-		
-		if list_test[0] == '1':
-			cpt1 = cpt1 + 1
-		elif list_test[0] == '2':
-			cpt2 = cpt2 + 1
-		else:
-			cpt3 = cpt3 + 1
-	
-	if(cpt1 != 59 or cpt2 != 71 or cpt3 != 48):
-		return False
-	
-	return True
-	
-	
-=======
     list_test = []
     cpt1 = 0
     cpt2 = 0
@@ -86,7 +56,6 @@ def datas_basic_verifications(raw_results):
     return True
 
 
->>>>>>> 3c0c03f57bdd49902c532fea98d33f1c1589cc96
 ## GET A LIST FOR EACH CULTIVATEURS
 def parse_into_cultivars(results):
     list_test = []
@@ -120,18 +89,10 @@ def parse_into_wine_composants(results):
 
 ## Parse a Dataset into columns
 def arrange_datas_composants_by_cultivars(dataset):
-<<<<<<< HEAD
-	new_dataset = np.array(dataset)
-	return np.transpose(new_dataset).tolist()
-	
-
-## NUAGE DE POINTS 
-=======
     new_dataset = np.array(dataset)
     return np.transpose(new_dataset).tolist()
 
 
->>>>>>> 3c0c03f57bdd49902c532fea98d33f1c1589cc96
 ## Datas Visualisation - Display a List of Lists
 def visualize_datas(dataset):
     fig = plt.figure()
@@ -147,12 +108,6 @@ def visualize_datas(dataset):
 
 
 ## Feed with ONLY cultivateur lists
-<<<<<<< HEAD
-def arranging_datas_cultivars(cultivateurX):	
-	for list_test in cultivateurX:
-		list_test.pop(0)	## Remove first index (cultivateur value)
-		
-=======
 def arranging_datas_cultivars(cultivateurX):
     for list_test in cultivateurX:
         list_test.pop(0)  ## Remove first index (cultivateur value)
@@ -169,7 +124,6 @@ def apply_PCA_analysis(dataset):
 def apply_decision_trees_analysis(dataset):
     print "TREE ANALYSIS"
 
->>>>>>> 3c0c03f57bdd49902c532fea98d33f1c1589cc96
 
 ## Mean calculation
 def calculate_mean(dataset):
@@ -181,55 +135,6 @@ def calculate_mean(dataset):
 
 
 def main():
-<<<<<<< HEAD
-	print '###############################################'
-	print 'Launching big Data project with python'
-	print 'Authors :'
-	print 'Jordan TETE'
-	print 'Thomas SOUVANNASAO'
-	print '###############################################\n'
-	
-	
-	parse_file('wine.txt')
-	
-	if datas_basic_verifications(results) == True:
-		print '->Basic Verifications OK on Dataset\n'
-	else:
-		print '->Failed - Dataset must be corrupted'
-		
-	parse_into_cultivars(results)
-	
-	
-	#X_scaled = preprocessing.scale(X)
-	#print X_scaled
-	
-	## parse composants by cultivars
-	composant_cultivateur1 = arrange_datas_composants_by_cultivars(cultivateur1)
-	composant_cultivateur2 = arrange_datas_composants_by_cultivars(cultivateur2)
-	composant_cultivateur3 = arrange_datas_composants_by_cultivars(cultivateur3)
-
-	print composant_cultivateur1
-	composant_cultivateur1.pop(13)
-	composant_cultivateur1.pop(12)
-	print composant_cultivateur1
-	
-	## Display above results
-	visualize_datas(composant_cultivateur1)
-	
-	#parse_into_wine_composants(results)
-	parse_into_wine_composants(cultivateur1)
-	
-	dataset = []
-	dataset.append(composant1)
-	dataset.append(composant2)
-	dataset.append(composant3)
-	dataset.append(composant4)
-	
-	average = calculate_mean(composant1)
-	
-	#visualize_datas(dataset)
-	
-=======
     print '###############################################'
     print 'Launching big Data project with python'
     print 'Authors :'
@@ -273,7 +178,6 @@ def main():
 # visualize_datas(dataset)
 
 
->>>>>>> 3c0c03f57bdd49902c532fea98d33f1c1589cc96
 
 
 #########################

@@ -134,6 +134,7 @@ f.text(0.5, 0.04, 'malic acid (standardized)', ha='center', va='center')
 f.text(0.08, 0.5, 'alcohol (standardized)',
     ha='center', va='center',   rotation='vertical'
     )
+f.canvas.set_window_title("Standardization")
 
 #plt.show()
 
@@ -168,6 +169,111 @@ ax[0].set_title('Training Dataset')
 ax[1].set_title('Test Dataset')
 f.text(0.5, 0.04, 'malic acid (normalized)', ha='center', va='center')
 f.text(0.08, 0.5, 'alcohol (normalized)', ha='center', va='center', rotation='vertical')
+f.canvas.set_window_title('MinMax Scaling')
 
-plt.show()
+#plt.show()
 
+
+# PCA
+print('=================================')
+print('= Principal Component Analysis  =')
+print('=================================')
+
+from sklearn.decomposition import PCA
+sklearn_pca = PCA(n_components=2)
+transf_pca = sklearn_pca.fit_transform(X_train)
+
+plt.figure(figsize=(10,8))
+
+for label,marker,color in zip(
+        range(1,4),('x', 'o', '^'),('blue', 'red', 'green')):
+
+    plt.scatter(x=transf_pca[:,0][y_train == label],
+            y=transf_pca[:,1][y_train == label],
+            marker=marker,
+            color=color,
+            alpha=0.7,
+            label='class {}'.format(label)
+            )
+
+plt.xlabel('vector 1')
+plt.ylabel('vector 2')
+
+plt.legend()
+plt.title('Most significant singular vectors after linear transformation via PCA')
+
+#plt.show()
+
+# LDA
+print('=================================')
+print('= Linear Discriminant Analysis  =')
+print('=================================')
+
+from sklearn.lda import LDA
+sklearn_lda = LDA(n_components=2)
+transf_lda = sklearn_lda.fit_transform(X_train, y_train)
+
+plt.figure(figsize=(10,8))
+
+for label,marker,color in zip(
+        range(1,4),('x', 'o', '^'),('blue', 'red', 'green')):
+
+
+    plt.scatter(x=transf_lda[:,0][y_train == label],
+            y=transf_lda[:,1][y_train == label],
+            marker=marker,
+            color=color,
+            alpha=0.7,
+            label='class {}'.format(label)
+            )
+
+plt.xlabel('vector 1')
+plt.ylabel('vector 2')
+
+plt.legend()
+plt.title('Most significant singular vectors after linear transformation via LDA')
+
+#plt.show()
+
+# LDA - Simple linear classifier
+print('===================================')
+print('= LDA - Simple Linear Classifier  =')
+print('===================================')
+
+# fit model
+lda_clf = LDA()
+lda_clf.fit(X_train, y_train)
+LDA(n_components=None, priors=None)
+
+# prediction
+print('1st sample from test dataset classified as:',    lda_clf.predict(X_test[0,:]))
+print('actual class label:', y_test[0])
+
+from sklearn import metrics
+pred_train_lda = lda_clf.predict(X_train)
+
+print('Prediction accuracy for the training dataset')
+print('{:.2%}'.format(metrics.accuracy_score(y_train, pred_train_lda)))
+
+pred_test_lda = lda_clf.predict(X_test)
+
+print('Prediction accuracy for the test dataset')
+print('{:.2%}'.format(metrics.accuracy_score(y_test, pred_test_lda)))
+
+# Confusion Matrix
+print('===========================================')
+print('= Confusion Matrix of the LDA-classifier  =')
+print('===========================================')
+print(metrics.confusion_matrix(y_test, lda_clf.predict(X_test)))
+
+'''
+# Export results
+print('===============================')
+print('= Exporting results to files  =')
+print('===============================')
+training_data = np.hstack((y_train.reshape(y_train.shape[0], 1), X_train))
+test_data = np.hstack((y_test.reshape(y_test.shape[0], 1), X_test))
+
+np.savetxt('./training_set.csv', training_data, delimiter=',')
+np.savetxt('./test_set.csv', test_data, delimiter=',')
+'''

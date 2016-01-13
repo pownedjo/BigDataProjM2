@@ -1,0 +1,66 @@
+eading wine.data file =
+==========================
+
+Number of samples (rows): 178
+Total number of features (columns): 13
+
+1st sample (i.e., 1st row):
+Class label: 1
+[14.23 1.71 2.43 15.60 127.00 2.80 3.06 0.28 2.29 5.64 1.04 3.92 1065.00]
+
+Class label frequencies
+Class 1 samples: # 59  => 33.15%
+Class 2 samples: # 71  => 39.89%
+Class 3 samples: # 48  => 26.97%
+================
+= Scatterplots =
+================
+Correlation =  -0.148595353347
+Correlation =  -0.214851167494
+Correlation =  0.2450775384
+========================================
+= Spliting dataset : training and test =
+========================================
+Class label frequencies
+
+Training Dataset:
+Class {:} samples: # 35  => 100.00%
+Class {:} samples: # 47  => 200.00%
+Class {:} samples: # 24  => 300.00%
+
+Test Dataset:
+Class {:} samples: # 24  => 100.00%
+Class {:} samples: # 24  => 200.00%
+Class {:} samples: # 24  => 300.00%
+===================
+= Standardization =
+===================
+==================================
+= Normalization - MinMax Scaling =
+==================================
+=================================
+= Principal Component Analysis  =
+=================================
+/usr/local/lib/python3.4/dist-packages/sklearn/lda.py:4: DeprecationWarning: lda.LDA has been moved to discriminant_analysis.LinearDiscriminantAnalysis in 0.17 and will be removed in 0.19
+  "in 0.17 and will be removed in 0.19", DeprecationWarning)
+=================================
+= Linear Discriminant Analysis  =
+=================================
+===================================
+= LDA - Simple Linear Classifier  =
+===================================
+/usr/local/lib/python3.4/dist-packages/sklearn/utils/validation.py:386: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and willraise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+  DeprecationWarning)
+1st sample from test dataset classified as: [3]
+actual class label: 3
+Prediction accuracy for the training dataset
+100.00%
+Prediction accuracy for the test dataset
+97.22%
+===========================================
+= Confusion Matrix of the LDA-classifier  =
+===========================================
+[[24  0  0]
+ [ 1 23  0]
+ [ 0  1 23]]
+

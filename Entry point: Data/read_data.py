@@ -83,7 +83,7 @@ from sklearn.cross_validation import train_test_split
 from sklearn import preprocessing
 
 X_train, X_test, y_train, y_test = train_test_split(X_wine, y_wine,
-                                                    test_size=0.30, random_state=123)
+                                                    test_size=0.40, random_state=123)
 
 print('Class label frequencies')
 
